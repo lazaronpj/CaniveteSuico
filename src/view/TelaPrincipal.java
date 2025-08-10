@@ -9,22 +9,19 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.UnsupportedLookAndFeelException;
 
 public class TelaPrincipal {
-	
+
 	public static JLabel criarCopyright() {
-	    return new JLabel(
-	        "<html><div style='text-align:center; color:#808080;'>"
-	      + "• © 2025 Lazaro Coder <span style='color:#C0C0C0;'>v1.0</span>"
-	      + "</div></html>"
-	    );
+		return new JLabel("<html><div style='text-align:center; color:#808080;'>" + "• © 2025 Lazaro Coder <span style='color:#C0C0C0;'>v1.0</span>" + "</div></html>");
 	}
 
+	public static void main(String[] args) throws UnsupportedLookAndFeelException {
 
-	public static void main(String[] args) {
 		JFrame frame = new JFrame("Canivete Suíço - Faz de tudo um pouco!");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(500, 150);
+		frame.setSize(650, 180);
 		frame.setResizable(false);
 		frame.setLayout(new BorderLayout());
 
@@ -57,20 +54,30 @@ public class TelaPrincipal {
 
 		});
 
-		JButton cotacao = new JButton("Cotação");
-		cotacao.setToolTipText("Clique aqui se deseja realizar alguma cotação de moeda!");
-		cotacao.addActionListener(new ActionListener() {
+		JButton assistenteFinanceiro = new JButton("Assistente Financeiro");
+		assistenteFinanceiro.setToolTipText("Clique aqui se deseja realizar algum cálculo financeiro!");
+		assistenteFinanceiro.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Cotacao.cotacao();
+				Financeiro.financeiro();
 			}
 
 		});
-		
+
+		JButton regraDeTres = new JButton("Regra de três");
+		regraDeTres.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				RegraDeTres.regraDeTres();
+			}
+		});
+
 		botoes.add(calculadora);
 		botoes.add(conversorDeTemperatura);
-		botoes.add(cotacao);
+		botoes.add(assistenteFinanceiro);
+		botoes.add(regraDeTres);
 
 		centro.add(botoes);
 
