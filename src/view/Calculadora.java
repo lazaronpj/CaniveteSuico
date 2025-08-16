@@ -20,7 +20,28 @@ import javax.swing.JTextField;
 
 import controller.LogicaCalculadora;
 
+/**
+ * Essa classe é responsável pela interface gráfica da calculadora.
+ * 
+ * @author Lazaro Nogueira
+ * @version 1.1
+ * @since 2025-08-13
+ */
+
 public class Calculadora {
+
+	/**
+	 * Exibe a interface gráfica da calculadora
+	 * 
+	 * <p>
+	 * Esse método cria a janela principal dessa classe, configura todos os
+	 * componentes e trata os eventos de interação com o usuário.
+	 * </p>
+	 * <p>
+	 * As operações nessa classe são delegadas para os métodos que contém as
+	 * lógicas na classe {@link controller.LogicaCalculadora}.
+	 * </p>
+	 */
 
 	public static void calcular() {
 		JFrame frame = new JFrame("Canivete Suíço - Calculadora");
@@ -53,6 +74,7 @@ public class Calculadora {
 		lblNum1.setPreferredSize(new Dimension(180, 25));
 		JTextField num1 = new JTextField();
 		num1.setPreferredSize(new Dimension(200, 25));
+		num1.setToolTipText("Digite o primeiro número válido!");
 		linha1.add(lblNum1);
 		linha1.add(num1);
 
@@ -61,6 +83,7 @@ public class Calculadora {
 		lblNum2.setPreferredSize(new Dimension(180, 25));
 		JTextField num2 = new JTextField();
 		num2.setPreferredSize(new Dimension(200, 25));
+		num2.setToolTipText("Digite o segundo número válido!");
 		linha2.add(lblNum2);
 		linha2.add(num2);
 
@@ -96,7 +119,9 @@ public class Calculadora {
 
 		JPanel botoes = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
 		JButton calcular = new JButton("Calcular");
+		calcular.setToolTipText("Clique aqui para efetuar o cálculo!");
 		JButton limparCampos = new JButton("Limpar campos");
+		limparCampos.setToolTipText("Clique aqui para limpar todos os campos!");
 
 		calcular.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -178,7 +203,7 @@ public class Calculadora {
 					}
 
 				} catch (NumberFormatException ex) {
-					JOptionPane.showMessageDialog(frame, "Digite um número válido e não deixe campos em branco!", "Erro", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(frame, "Não deixe campos em branco!", "Erro", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

@@ -18,7 +18,28 @@ import javax.swing.JTextField;
 
 import controller.LogicaConversor;
 
+/**
+ * Essa classe é responsável pela interface gráfica do conversor de temperatura
+ * 
+ * @author Lazaro Nogueira
+ * @version 1.1
+ * @since 2025-08-13
+ */
+
 public class Conversor {
+
+	/**
+	 * Exibe a interface gráfica do conversor de temperatura.
+	 * 
+	 * *
+	 * <p>
+	 * Esse método cria a janela principal dessa classe, configura todos os
+	 * componentes e trata os eventos de interação com o usuário.
+	 * </p>
+	 * 
+	 * As operações nessa classe são delegadas para os métodos que contém as
+	 * lógicas na classe {@link controller.LogicaConversor}.
+	 */
 
 	public static void conversor() {
 		JFrame frame = new JFrame("Canivete Suíço - Conversor de Temperatura");
@@ -49,16 +70,16 @@ public class Conversor {
 		rotuloTemperatura.setPreferredSize(new Dimension(120, 25));
 		JTextField campoTemperatura = new JTextField();
 		campoTemperatura.setPreferredSize(new Dimension(200, 25));
+		campoTemperatura.setToolTipText("Digite a temperatura que você deseja converter!");
 		linha1.add(rotuloTemperatura);
 		linha1.add(campoTemperatura);
 		centro.add(linha1);
 
 		JPanel botoes = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
 		JButton converter = new JButton("Converter");
-		JButton limpar = new JButton("Limpar Campo");
-		botoes.add(converter);
-		botoes.add(limpar);
-		centro.add(botoes);
+		converter.setToolTipText("Clique aqui para efetuar a conversão de temperatura!");
+		JButton limparCampos = new JButton("Limpar campos");
+		limparCampos.setToolTipText("Clique aqui para limpar todos os campos!");
 
 		converter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -87,11 +108,15 @@ public class Conversor {
 			}
 		});
 
-		limpar.addActionListener(new ActionListener() {
+		limparCampos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				campoTemperatura.setText("");
 			}
 		});
+
+		botoes.add(converter);
+		botoes.add(limparCampos);
+		centro.add(botoes);
 
 		JPanel sul = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		sul.add(TelaPrincipal.criarCopyright());

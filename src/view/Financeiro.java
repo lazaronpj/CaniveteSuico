@@ -20,7 +20,27 @@ import javax.swing.JTextField;
 
 import controller.LogicaFinanceira;
 
+/**
+ * Essa classe é responsável pela interface gráfica do assistente financeiro
+ * 
+ * @author Lazaro Nogueira
+ * @version 1.1
+ * @since 2025-08-13
+ */
 public class Financeiro {
+
+	/**
+	 * Exibe a interface gráfica do assistente financeiro.
+	 * 
+	 * *
+	 * <p>
+	 * Esse método cria a janela principal dessa classe, configura todos os
+	 * componentes e trata os eventos de interação com o usuário.
+	 * </p>
+	 * 
+	 * As operações nessa classe são delegadas para os métodos que contém as
+	 * lógicas na classe {@link controller.LogicaFinanceira}.
+	 */
 
 	public static void financeiro() {
 		JFrame frame = new JFrame("Canivete Suíço - Financeiro");
@@ -30,7 +50,7 @@ public class Financeiro {
 		frame.setLayout(new BorderLayout());
 
 		JPanel norte = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 10));
-		JLabel dica = new JLabel("Digite apenas algorítimos numéricos!");
+		JLabel dica = new JLabel("Digite apenas algarismos numéricos!");
 		norte.add(dica);
 
 		JPanel centro = new JPanel();
@@ -55,6 +75,7 @@ public class Financeiro {
 		valorPresente.setPreferredSize(new Dimension(120, 25));
 		JTextField vp = new JTextField();
 		vp.setPreferredSize(new Dimension(200, 25));
+		vp.setToolTipText("Digite o valor atual!");
 		linha1.add(valorPresente);
 		linha1.add(vp);
 
@@ -63,6 +84,7 @@ public class Financeiro {
 		valorFuturo.setPreferredSize(new Dimension(120, 25));
 		JTextField vf = new JTextField();
 		vf.setPreferredSize(new Dimension(200, 25));
+		vf.setToolTipText("Digite o valor que você quer simular que você terá no futuro!");
 		linha2.add(valorFuturo);
 		linha2.add(vf);
 
@@ -80,6 +102,7 @@ public class Financeiro {
 		tempo.setPreferredSize(new Dimension(120, 25));
 		JTextField tmp = new JTextField();
 		tmp.setPreferredSize(new Dimension(200, 25));
+		tmp.setToolTipText("Digite o valor do tempo do investimento!");
 		linha4.add(tempo);
 		linha4.add(tmp);
 
@@ -165,6 +188,9 @@ public class Financeiro {
 
 		JPanel botoes = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
 		JButton calcular = new JButton("Calcular");
+		calcular.setToolTipText("Clique aqui para efetuar o cálculo financeiro!");
+		JButton limparCampos = new JButton("Limpar campos");
+		limparCampos.setToolTipText("Clique aqui para limpar todos os campos!");
 		calcular.addActionListener(new ActionListener() {
 
 			@Override
@@ -278,7 +304,6 @@ public class Financeiro {
 			}
 		});
 
-		JButton limparCampos = new JButton("Limpar Campos");
 		botoes.add(calcular);
 		botoes.add(limparCampos);
 		centro.add(botoes);

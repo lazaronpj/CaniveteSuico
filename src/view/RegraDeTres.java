@@ -20,7 +20,28 @@ import javax.swing.JTextField;
 
 import controller.LogicaRegraDeTres;
 
+/**
+ * Essa classe é responsável pela interface gráfica da regra de três
+ * 
+ * @author Lazaro Nogueira
+ * @version 1.1
+ * @since 2025-08-13
+ */
+
 public class RegraDeTres {
+
+	/**
+	 * Exibe a interface gráfica da regra de três.
+	 * 
+	 * *
+	 * <p>
+	 * Esse método cria a janela principal dessa classe, configura todos os
+	 * componentes e trata os eventos de interação com o usuário.
+	 * </p>
+	 * 
+	 * As operações nessa classe são delegadas para os métodos que contém as
+	 * lógicas na classe {@link controller.LogicaRegraDeTres}.
+	 */
 
 	public static void regraDeTres() {
 
@@ -31,7 +52,7 @@ public class RegraDeTres {
 		frame.setLayout(new BorderLayout());
 
 		JPanel norte = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 10));
-		JLabel dica = new JLabel("Digite apenas algorítimos numéricos!");
+		JLabel dica = new JLabel("Digite apenas algarismos numéricos!");
 		norte.add(dica);
 
 		JPanel centro = new JPanel();
@@ -55,6 +76,7 @@ public class RegraDeTres {
 		JLabel labelA = new JLabel("Digite o valor A: ");
 		JTextField a = new JTextField();
 		a.setPreferredSize(new Dimension(200, 25));
+		a.setToolTipText("Digite o valor da primeira grandeza!");
 		linha1.add(labelA);
 		linha1.add(a);
 
@@ -62,6 +84,8 @@ public class RegraDeTres {
 		JLabel labelB = new JLabel("Digite o valor B: ");
 		JTextField b = new JTextField();
 		b.setPreferredSize(new Dimension(200, 25));
+		b.setToolTipText("Digite o valor da segunda grandeza!");
+
 		linha2.add(labelB);
 		linha2.add(b);
 
@@ -69,6 +93,8 @@ public class RegraDeTres {
 		JLabel labelC = new JLabel("Digite o valor C: ");
 		JTextField c = new JTextField();
 		c.setPreferredSize(new Dimension(200, 25));
+		c.setToolTipText("Digite o valor da terçeira grandeza!");
+
 		linha3.add(labelC);
 		linha3.add(c);
 
@@ -99,6 +125,9 @@ public class RegraDeTres {
 
 		JPanel botoes = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
 		JButton calcular = new JButton("Calcular");
+		calcular.setToolTipText("Clique aqui para efetuar o cálculo da regra de três!");
+		JButton limparCampos = new JButton("Limpar campos");
+		limparCampos.setToolTipText("Clique aqui para limpar todos os campos!");
 		calcular.addActionListener(new ActionListener() {
 
 			@Override
@@ -118,14 +147,16 @@ public class RegraDeTres {
 						double resultado = LogicaRegraDeTres.regraDeTresDireta(valorCampoA, valorCampoB, valorCampoC);
 						String formatado = String.format("%.4f", resultado);
 
-						JOptionPane.showMessageDialog(frame, "<html>O resultado é: <font color='red'>" + formatado + "</font></html>", "Resultado", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(frame, "<html>O resultado é <font color='red'>X</font>: <font color='red'>" + formatado + "</font></html>", "Resultado",
+								JOptionPane.INFORMATION_MESSAGE);
 						a.setText("");
 						b.setText("");
 						c.setText("");
 					} else if (op.equals("Regra de Três Inversamente Proporcional")) {
 						double resultado = LogicaRegraDeTres.regraDeTresInversa(valorCampoA, valorCampoB, valorCampoC);
 						String formatado = String.format("%.4f", resultado);
-						JOptionPane.showMessageDialog(frame, "<html>O resultado é: <font color='red'>" + formatado + "</font></html>", "Resultado", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(frame, "<html>O resultado é <font color='red'>X</font>: <font color='red'>" + formatado + "</font></html>", "Resultado",
+								JOptionPane.INFORMATION_MESSAGE);
 						a.setText("");
 						b.setText("");
 						c.setText("");
@@ -136,7 +167,6 @@ public class RegraDeTres {
 			}
 		});
 
-		JButton limparCampos = new JButton("Limpar Campos");
 		limparCampos.addActionListener(new ActionListener() {
 
 			@Override

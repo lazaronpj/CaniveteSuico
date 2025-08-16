@@ -11,10 +11,29 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UnsupportedLookAndFeelException;
 
+/**
+ * Essa classe é responsável pela interface gráfica principal do programa
+ * 
+ * @author Lazaro Nogueira
+ * @version 1.1
+ * @since 2025-08-13
+ */
+
 public class TelaPrincipal {
 
+	/**
+	 * Exibe a interface gráfica principal desse programa.
+	 * 
+	 * *
+	 * <p>
+	 * Esse método cria a janela principal dessa classe, configura todos os
+	 * componentes e trata os eventos de interação com o usuário.
+	 * </p>
+	 * 
+	 */
+
 	public static JLabel criarCopyright() {
-		return new JLabel("<html><div style='text-align:center; color:#808080;'>" + "• © 2025 Lazaro Coder <span style='color:#C0C0C0;'>v1.0</span>" + "</div></html>");
+		return new JLabel("<html><div style='text-align:center; color:#808080;'>" + "© 2025 Lazaro Coder <span style='color:#C0C0C0;'>v1.1</span>" + "</div></html>");
 	}
 
 	public static void main(String[] args) throws UnsupportedLookAndFeelException {
@@ -40,7 +59,6 @@ public class TelaPrincipal {
 			public void actionPerformed(ActionEvent e) {
 				Calculadora.calcular();
 			}
-
 		});
 
 		JButton conversorDeTemperatura = new JButton("Conversor de Temperatura");
@@ -51,7 +69,6 @@ public class TelaPrincipal {
 			public void actionPerformed(ActionEvent e) {
 				Conversor.conversor();
 			}
-
 		});
 
 		JButton assistenteFinanceiro = new JButton("Assistente Financeiro");
@@ -62,7 +79,6 @@ public class TelaPrincipal {
 			public void actionPerformed(ActionEvent e) {
 				Financeiro.financeiro();
 			}
-
 		});
 
 		JButton regraDeTres = new JButton("Regra de três");
