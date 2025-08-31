@@ -9,7 +9,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  * Essa classe é responsável pela interface gráfica principal do programa
@@ -36,11 +35,11 @@ public class TelaPrincipal {
 		return new JLabel("<html><div style='text-align:center; color:#808080;'>" + "© 2025 Lazaro Coder <span style='color:#C0C0C0;'>v1.1</span>" + "</div></html>");
 	}
 
-	public static void main(String[] args) throws UnsupportedLookAndFeelException {
+	public static void main(String[] args) {
 
 		JFrame frame = new JFrame("Canivete Suíço - Faz de tudo um pouco!");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(650, 180);
+		frame.setSize(800, 180);
 		frame.setResizable(false);
 		frame.setLayout(new BorderLayout());
 
@@ -90,10 +89,20 @@ public class TelaPrincipal {
 			}
 		});
 
+		JButton equacaoInequacao = new JButton("Equação e Inequação");
+		equacaoInequacao.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				EquacaoInequacao.equacaoInequacao();
+			}
+		});
+
 		botoes.add(calculadora);
 		botoes.add(conversorDeTemperatura);
 		botoes.add(assistenteFinanceiro);
 		botoes.add(regraDeTres);
+		botoes.add(equacaoInequacao);
 
 		centro.add(botoes);
 
