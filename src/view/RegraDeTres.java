@@ -147,22 +147,20 @@ public class RegraDeTres {
 						double resultado = LogicaRegraDeTres.regraDeTresDireta(valorCampoA, valorCampoB, valorCampoC);
 						String formatado = String.format("%.4f", resultado);
 
-						JOptionPane.showMessageDialog(frame, "<html>O resultado é <font color='red'>X</font>: <font color='red'>" + formatado + "</font></html>", "Resultado",
-								JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(frame, "<html>O resultado é <font color='red'>X</font>: <font color='red'>" + formatado + "</font></html>", "Resultado", JOptionPane.INFORMATION_MESSAGE);
 						a.setText("");
 						b.setText("");
 						c.setText("");
 					} else if (op.equals("Regra de Três Inversamente Proporcional")) {
 						double resultado = LogicaRegraDeTres.regraDeTresInversa(valorCampoA, valorCampoB, valorCampoC);
 						String formatado = String.format("%.4f", resultado);
-						JOptionPane.showMessageDialog(frame, "<html>O resultado é <font color='red'>X</font>: <font color='red'>" + formatado + "</font></html>", "Resultado",
-								JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(frame, "<html>O resultado é <font color='red'>X</font>: <font color='red'>" + formatado + "</font></html>", "Resultado", JOptionPane.INFORMATION_MESSAGE);
 						a.setText("");
 						b.setText("");
 						c.setText("");
 					}
 				} catch (NumberFormatException ex) {
-					JOptionPane.showMessageDialog(null, "Digite um número válido e não deixe campos em branco!", "Erro", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(frame, "Entrada inválida! Digite apenas números!", "Erro", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

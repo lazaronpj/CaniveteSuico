@@ -61,8 +61,8 @@ public class Financeiro {
 		pergunta.setAlignmentX(JLabel.LEFT_ALIGNMENT);
 		centro.add(pergunta);
 
-		String[] opFinanceira = {"Selecione uma opção", "Valor Futuro Simples", "Valor Futuro Composto", "Valor Presente Simples", "Valor Presente Composto", "Juros Simples", "Juros Compostos",
-				"Tempo Juros Simples", "Tempo Juros Compostos", "Taxa Juros Simples", "Taxa Juros Compostos"};
+		String[] opFinanceira = {"Selecione uma opção", "Valor Futuro Simples", "Valor Futuro Composto", "Valor Presente Simples", "Valor Presente Composto", "Juros Simples", "Juros Compostos", "Tempo Juros Simples",
+				"Tempo Juros Compostos", "Taxa Juros Simples", "Taxa Juros Compostos"};
 		JComboBox<String> comboFinanceiro = new JComboBox<>(opFinanceira);
 		comboFinanceiro.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
 		centro.add(comboFinanceiro);
@@ -299,7 +299,7 @@ public class Financeiro {
 						tmp.setText("");
 					}
 				} catch (NumberFormatException ex) {
-					JOptionPane.showMessageDialog(null, "Digite um número válido e não deixe campos em branco!", "Erro", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(frame, "Entrada inválida! Digite apenas números!", "Erro", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

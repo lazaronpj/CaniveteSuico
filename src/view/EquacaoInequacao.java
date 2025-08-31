@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -62,7 +64,7 @@ public class EquacaoInequacao {
 		pergunta.setAlignmentX(JLabel.LEFT_ALIGNMENT);
 		centro.add(pergunta);
 
-		String[] opcoesEqIn = {"Selecione uma opção", "Equação do primeiro grau", "Equação do segundo grau", "Inequação do primeiro grau", "Inequação do segundo grau"};
+		String[] opcoesEqIn = {"Selecione uma opção", "Equação do primeiro grau", "Equação do segundo grau X1", "Equação do segundo grau X2", "Inequação do primeiro grau", "Inequação do segundo grau"};
 		JComboBox<String> comboOp = new JComboBox<>(opcoesEqIn);
 		comboOp.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
 		centro.add(comboOp);
@@ -99,7 +101,7 @@ public class EquacaoInequacao {
 
 		JPanel linha4 = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 10));
 		JLabel rotuloSinal = new JLabel("Valor desigualdade:");
-		rotuloC.setPreferredSize(new Dimension(120, 25));
+		rotuloSinal.setPreferredSize(new Dimension(120, 25));
 		String[] opcoesDesigualdade = {"Selecione uma opção", "> 'Maior'", "< 'Menor'", "≥ 'Maior ou igual'", "≤ 'Menor ou igual'"};
 		JComboBox<String> comboDesigualdade = new JComboBox<>(opcoesDesigualdade);
 		comboDesigualdade.setPreferredSize(new Dimension(200, 25));
@@ -108,14 +110,36 @@ public class EquacaoInequacao {
 		linha4.add(comboDesigualdade);
 		centro.add(linha4);
 
+		campoA.addKeyListener(new KeyAdapter() {
+			public void keyReleased(KeyEvent e) {
+				String txt = campoA.getText().trim().replaceAll("[^0-9.-]", "");
+				campoA.setText(txt);
+			}
+		});
+
+		campoB.addKeyListener(new KeyAdapter() {
+			public void keyReleased(KeyEvent e) {
+				String txt = campoB.getText().trim().replaceAll("[^0-9.-]", "");
+				campoB.setText(txt);
+			}
+		});
+
+		campoC.addKeyListener(new KeyAdapter() {
+			public void keyReleased(KeyEvent e) {
+				String txt = campoC.getText().trim().replaceAll("[^0-9.-]", "");
+				campoC.setText(txt);
+			}
+		});
+
 		comboOp.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String opSelecionada = (String) comboOp.getSelectedItem();
 
-				if ("Equação do primeiro grau".equals(opSelecionada) || ("Equação do segundo grau".equals(opSelecionada))) {
+				if (("Equação do primeiro grau".equals(opSelecionada)) || ("Equação do segundo grau X1".equals(opSelecionada)) || ("Equação do segundo grau X2".equals(opSelecionada))) {
 					comboDesigualdade.setEnabled(false);
+
 				} else {
 					comboDesigualdade.setEnabled(true);
 				}
@@ -155,16 +179,37 @@ public class EquacaoInequacao {
 						if (resultado != null) {
 							String formatado = String.format("%.4f", resultado);
 							JOptionPane.showMessageDialog(frame, "O resultado é: X = " + formatado, "Resultado", JOptionPane.INFORMATION_MESSAGE);
+							comboOp.setSelectedIndex(0);
+							campoA.setText("");
+							campoB.setText("");
+							comboDesigualdade.setSelectedIndex(0);
 						}
-					} else if ("".equals(opSelecionada)) {
+					} else if ("Equação do segundo grau X1".equals(opSelecionada)) {
 						Double resultado = LogicaEquacaoInequacao.equacaoSegundoGrauX1(valorA, valorB, valorC);
 						if (resultado != null) {
-
+							String formatado = String.format("%.4f", resultado);
+							JOptionPane.showMessageDialog(frame, "O resultado é: X1 = " + formatado, "Resultado", JOptionPane.INFORMATION_MESSAGE);
+							comboOp.setSelectedIndex(0);
+							campoA.setText("");
+							campoB.setText("");
+							campoC.setText("");
+							comboDesigualdade.setSelectedIndex(0);
+						}
+					} else if ("Equação do segundo grau X2".equals(opSelecionada)) {
+						Double resultado = LogicaEquacaoInequacao.equacaoSegundoGrauX2(valorA, valorB, valorC);
+						if (resultado != null) {
+							String formatado = String.format("%.4f", resultado);
+							JOptionPane.showMessageDialog(frame, "O resultado é: X2 = " + formatado, "Resultado", JOptionPane.INFORMATION_MESSAGE);
+							comboOp.setSelectedIndex(0);
+							campoA.setText("");
+							campoB.setText("");
+							campoC.setText("");
+							comboDesigualdade.setSelectedIndex(0);
 						}
 					}
 
 				} catch (NumberFormatException ex) {
-					JOptionPane.showMessageDialog(frame, "Não deixe campos em branco!", "Erro", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(frame, "Entrada inválida! Digite apenas números!", "Erro", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

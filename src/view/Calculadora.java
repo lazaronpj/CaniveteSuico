@@ -203,7 +203,7 @@ public class Calculadora {
 					}
 
 				} catch (NumberFormatException ex) {
-					JOptionPane.showMessageDialog(frame, "Não deixe campos em branco!", "Erro", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(frame, "Entrada inválida! Digite apenas números!", "Erro", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

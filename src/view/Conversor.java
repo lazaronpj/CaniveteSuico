@@ -99,11 +99,10 @@ public class Conversor {
 						unidade = "Celsius";
 					}
 
-					JOptionPane.showMessageDialog(null, "<html>O resultado da conversão é <font color='red'>" + resultado + "</font> graus</html> " + unidade + "!", "Resultado",
-							JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "<html>O resultado da conversão é <font color='red'>" + resultado + "</font> graus</html> " + unidade + "!", "Resultado", JOptionPane.INFORMATION_MESSAGE);
 
 				} catch (NumberFormatException ex) {
-					JOptionPane.showMessageDialog(frame, "Digite um número válido!", "Erro", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(frame, "Entrada inválida! Digite apenas números!", "Erro", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
