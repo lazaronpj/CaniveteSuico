@@ -1,5 +1,7 @@
 package controller;
 
+import javax.swing.JOptionPane;
+
 /**
  * Classe responsável pela lógica dos cálculos financeiros.
  * 
@@ -20,7 +22,7 @@ public class LogicaFinanceira {
 	 *            Período de tempo
 	 * @return Valor futuro calculado
 	 */
-	public static Double valorFuturoSimples(double valorPresente, double taxaDeJuros, double tempo) {
+	public Double valorFuturoSimples(double valorPresente, double taxaDeJuros, double tempo) {
 		return valorPresente * (1 + taxaDeJuros * tempo);
 	}
 
@@ -35,7 +37,7 @@ public class LogicaFinanceira {
 	 *            Período de tempo
 	 * @return Valor futuro calculado
 	 */
-	public static Double valorFuturoComposto(double valorPresente, double taxaDeJuros, double tempo) {
+	public Double valorFuturoComposto(double valorPresente, double taxaDeJuros, double tempo) {
 		return valorPresente * Math.pow(1 + taxaDeJuros, tempo);
 	}
 
@@ -48,11 +50,12 @@ public class LogicaFinanceira {
 	 *            Taxa de juros
 	 * @param tempo
 	 *            Período de tempo
-	 * @return Valor presente calculado ou retorna nulo caso haja entradas
-	 *         inválidas
+	 * @return Valor presente calculado ou retorna nulo caso haja entradas inválidas
 	 */
-	public static Double valorPresenteSimples(double valorFuturo, double taxaDeJuros, double tempo) {
+	public Double valorPresenteSimples(double valorFuturo, double taxaDeJuros, double tempo) {
 		if (taxaDeJuros == 0 || tempo == 0) {
+			JOptionPane.showMessageDialog(null, "O valor da taxa de juros e o tempo não podem ser menor ou igual a 0!", "Aviso",
+					JOptionPane.WARNING_MESSAGE);
 			return null;
 		} else {
 			return valorFuturo / (1 + taxaDeJuros * tempo);
@@ -68,11 +71,12 @@ public class LogicaFinanceira {
 	 *            Taxa de juros
 	 * @param tempo
 	 *            Período de tempo
-	 * @return Valor presente calculado ou retorna nulo caso haja entradas
-	 *         inválidas
+	 * @return Valor presente calculado ou retorna nulo caso haja entradas inválidas
 	 */
-	public static Double valorPresenteComposto(double valorFuturo, double taxaDeJuros, double tempo) {
-		if (taxaDeJuros <= -1 || tempo == 0) {
+	public Double valorPresenteComposto(double valorFuturo, double taxaDeJuros, double tempo) {
+		if (taxaDeJuros <= 0 || tempo <= 0) {
+			JOptionPane.showMessageDialog(null, "A taxa de juros e o tempo não podem ser menor ou igual a 0!", "Aviso",
+					JOptionPane.WARNING_MESSAGE);
 			return null;
 		} else {
 			return valorFuturo / Math.pow(1 + taxaDeJuros, tempo);
@@ -90,7 +94,7 @@ public class LogicaFinanceira {
 	 *            Período de tempo
 	 * @return Juros simples acumulados
 	 */
-	public static Double jurosSimples(double valorPresente, double taxaDeJuros, double tempo) {
+	public Double jurosSimples(double valorPresente, double taxaDeJuros, double tempo) {
 		return valorPresente * taxaDeJuros * tempo;
 	}
 
@@ -105,7 +109,7 @@ public class LogicaFinanceira {
 	 *            Período de tempo
 	 * @return Juros compostos acumulados
 	 */
-	public static Double jurosCompostos(double valorPresente, double taxaDeJuros, double tempo) {
+	public Double jurosCompostos(double valorPresente, double taxaDeJuros, double tempo) {
 		return valorPresente * (Math.pow(1 + taxaDeJuros, tempo) - 1);
 	}
 
@@ -120,8 +124,10 @@ public class LogicaFinanceira {
 	 *            Taxa de juros
 	 * @return Tempo calculado ou retorna nulo caso haja entradas inválidas
 	 */
-	public static Double tempoSimples(double valorPresente, double valorFuturo, double taxaDeJuros) {
-		if (valorPresente == 0 || taxaDeJuros == 0) {
+	public Double tempoSimples(double valorPresente, double valorFuturo, double taxaDeJuros) {
+		if (valorPresente <= 0 || taxaDeJuros <= 0) {
+			JOptionPane.showMessageDialog(null, "O valor presente e a taxa de juros não podem ser menor ou igual a 0!", "Aviso",
+					JOptionPane.WARNING_MESSAGE);
 			return null;
 		} else {
 			return ((valorFuturo / valorPresente) - 1) / taxaDeJuros;
@@ -139,8 +145,10 @@ public class LogicaFinanceira {
 	 *            Taxa de juros
 	 * @return Tempo calculado ou retorna nulo caso haja entradas inválidas
 	 */
-	public static Double tempoComposto(double valorPresente, double valorFuturo, double taxaDeJuros) {
-		if (valorPresente == 0 || taxaDeJuros <= -1 || valorFuturo <= 0) {
+	public Double tempoComposto(double valorPresente, double valorFuturo, double taxaDeJuros) {
+		if (valorPresente <= 0 || taxaDeJuros <= 0 || valorFuturo <= 0) {
+			JOptionPane.showMessageDialog(null, "O valor presente, da taxa de juros e o valor futuro não podem ser menor ou igual a 0!",
+					"Aviso", JOptionPane.WARNING_MESSAGE);
 			return null;
 		} else {
 			return Math.log(valorFuturo / valorPresente) / Math.log(1 + taxaDeJuros);
@@ -158,8 +166,10 @@ public class LogicaFinanceira {
 	 *            Período de tempo
 	 * @return Taxa calculada ou retorna nulo caso haja entradas inválidas
 	 */
-	public static Double taxaSimples(double valorPresente, double valorFuturo, double tempo) {
-		if (valorPresente == 0 || tempo == 0) {
+	public Double taxaSimples(double valorPresente, double valorFuturo, double tempo) {
+		if (valorPresente <= 0 || tempo <= 0) {
+			JOptionPane.showMessageDialog(null, "O valor presente e o tempo não podem ser menor ou igual a 0!", "Aviso",
+					JOptionPane.WARNING_MESSAGE);
 			return null;
 		} else {
 			return ((valorFuturo / valorPresente) - 1) / tempo;
@@ -177,51 +187,14 @@ public class LogicaFinanceira {
 	 *            Período de tempo
 	 * @return Taxa calculada ou retorna nulo caso haja entradas inválidas
 	 */
-	public static Double taxaComposta(double valorPresente, double valorFuturo, double tempo) {
-		if (valorPresente == 0 || tempo == 0) {
+	public Double taxaComposta(double valorPresente, double valorFuturo, double tempo) {
+		if (valorPresente <= 0 || tempo <= 0) {
+			JOptionPane.showMessageDialog(null, "O valor presente e o tempo não podem ser menor ou igual a 0!", "Aviso",
+					JOptionPane.WARNING_MESSAGE);
 			return null;
 		} else {
 			return Math.pow(valorFuturo / valorPresente, 1.0 / tempo) - 1;
 		}
 	}
 
-	/**
-	 * Regra de três direta.
-	 * 
-	 * @param valor1
-	 *            Primeira grandeza
-	 * @param valor2
-	 *            Segunda grandeza
-	 * @param valor3
-	 *            Terceira grandeza
-	 * @return Resultado da regra de três direta ou retorna nulo caso haja
-	 *         entradas inválidas
-	 */
-	public static Double regraDeTresDireta(double valor1, double valor2, double valor3) {
-		if (valor1 == 0) {
-			return null;
-		} else {
-			return (valor2 * valor3) / valor1;
-		}
-	}
-
-	/**
-	 * Regra de três inversa.
-	 * 
-	 * @param valor1
-	 *            Primeira grandeza
-	 * @param valor2
-	 *            Segunda grandeza
-	 * @param valor3
-	 *            Terceira grandeza
-	 * @return Resultado da regra de três inversa ou retorna nulo caso haja
-	 *         entradas inválidas
-	 */
-	public static Double regraDeTresInversa(double valor1, double valor2, double valor3) {
-		if (valor3 == 0) {
-			return null;
-		} else {
-			return (valor1 * valor2) / valor3;
-		}
-	}
 }

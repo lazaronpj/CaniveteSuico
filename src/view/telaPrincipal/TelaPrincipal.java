@@ -1,4 +1,4 @@
-package view;
+package view.telaPrincipal;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -9,6 +9,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import view.telaCalculos.Calculadora;
+import view.telaCalculos.Conversor;
+import view.telaCalculos.EquacaoInequacao;
+import view.telaCalculos.Financeiro;
+import view.telaCalculos.RegraDeTres;
 
 /**
  * Essa classe é responsável pela interface gráfica principal do programa
@@ -25,21 +31,21 @@ public class TelaPrincipal {
 	 * 
 	 * *
 	 * <p>
-	 * Esse método cria a janela principal dessa classe, configura todos os
-	 * componentes e trata os eventos de interação com o usuário.
+	 * Esse método cria a janela principal dessa classe, configura todos os componentes e trata os eventos de interação com o usuário.
 	 * </p>
 	 * 
 	 */
 
 	public static JLabel criarCopyright() {
-		return new JLabel("<html><div style='text-align:center; color:#808080;'>" + "© 2025 Lazaro Coder <span style='color:#C0C0C0;'>v1.1</span>" + "</div></html>");
+		return new JLabel("<html><div style='text-align:center; color:#808080;'>"
+				+ "© 2025 Lazaro Coder <span style='color:#C0C0C0;'>v1.1</span>" + "</div></html>");
 	}
 
 	public static void main(String[] args) {
 
 		JFrame frame = new JFrame("Canivete Suíço - Faz de tudo um pouco!");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(800, 180);
+		frame.setSize(800, 160);
 		frame.setResizable(false);
 		frame.setLayout(new BorderLayout());
 

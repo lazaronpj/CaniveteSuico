@@ -1,8 +1,12 @@
 package controller;
 
+import javax.swing.JOptionPane;
+
 /**
  * Classe responsável pela lógica do módulo de calculadora.
- *
+ * 
+ * Recebe valores da interface gráfica e executa as operações matemáticas conforme a opção selecionada pelo usuário.
+ * 
  * @author Lazaro Nogueira
  * @version 1.1
  * @since 2025-08-13
@@ -17,9 +21,9 @@ public class LogicaCalculadora {
 	 *            Primeiro número responsável pelo cálculo,
 	 * @param numero2
 	 *            Segundo número responsável pelo cálculo.
-	 * @return A soma de numero1 mais numero2.
+	 * @return Resultado da soma.
 	 */
-	public static Double somar(double numero1, double numero2) {
+	public Double somar(double numero1, double numero2) {
 		return numero1 + numero2;
 	}
 
@@ -30,9 +34,9 @@ public class LogicaCalculadora {
 	 *            Primeiro número responsável pelo cálculo,
 	 * @param numero2
 	 *            Segundo número responsável pelo cálculo.
-	 * @return A subtração do numero1 menos o numero2.
+	 * @return Resultado da sobtração.
 	 */
-	public static Double subtrair(double numero1, double numero2) {
+	public Double subtrair(double numero1, double numero2) {
 		return numero1 - numero2;
 	}
 
@@ -43,9 +47,9 @@ public class LogicaCalculadora {
 	 *            Primeiro número responsável pelo cálculo,
 	 * @param numero2
 	 *            Segundo número responsável pelo cálculo.
-	 * @return A multiplicação do numero1 vezes o numero2.
+	 * @return Resultado da multiplicação.
 	 */
-	public static Double multiplicar(double numero1, double numero2) {
+	public Double multiplicar(double numero1, double numero2) {
 		return numero1 * numero2;
 	}
 
@@ -56,12 +60,11 @@ public class LogicaCalculadora {
 	 *            Primeiro número responsável pelo cálculo,
 	 * @param numero2
 	 *            Segundo número responsável pelo cálculo.
-	 * @return A divisão do numero1 pelo o numero2. Também verifica se o número2
-	 *         é nulo.
+	 * @return Resultado da divisão. Também verifica se o número2 é igual a 0.
 	 */
-	public static Double dividir(double numero1, double numero2) {
+	public Double dividir(double numero1, double numero2) {
 		if (numero2 == 0) {
-			return null;
+			JOptionPane.showMessageDialog(null, "O segundo campo não pode ser 0, favor corrigir!", "Aviso", JOptionPane.WARNING_MESSAGE);;
 		}
 		return numero1 / numero2;
 	}
@@ -73,9 +76,9 @@ public class LogicaCalculadora {
 	 *            Primeiro número responsável pelo cálculo,
 	 * @param numero2
 	 *            Segundo número responsável pelo cálculo.
-	 * @return O resto da divisão do numero1 pelo o numero2.
+	 * @return Resultado do resto da divisão.
 	 */
-	public static Double restoDaDivisao(double numero1, double numero2) {
+	public Double restoDaDivisao(double numero1, double numero2) {
 		return numero1 % numero2;
 	}
 
@@ -86,9 +89,9 @@ public class LogicaCalculadora {
 	 *            Primeiro número responsável pelo cálculo,
 	 * @param percentual
 	 *            se refere ao número responsável pelo cálculo da taxa.
-	 * @return O numero1 vezes o percentual em parênteses, dividido por 100.
+	 * @return O resultado do numero1 vezes o percentual em parênteses, dividido por 100.
 	 */
-	public static Double porcentagem(double numero1, double percentual) {
+	public Double porcentagem(double numero1, double percentual) {
 		return (numero1 * percentual) / 100;
 	}
 
@@ -99,10 +102,9 @@ public class LogicaCalculadora {
 	 *            Primeiro número responsável pelo cálculo,
 	 * @param numero2
 	 *            Segundo número responsável pelo cálculo.
-	 * @return A potenciação utilizando a biblioteca Math.pow do numero1 elevado
-	 *         ao numero2.
+	 * @return O resultado da potenciação utilizando a biblioteca Math.pow.
 	 */
-	public static Double potenciacao(double numero1, double numero2) {
+	public Double potenciacao(double numero1, double numero2) {
 		return Math.pow(numero1, numero2);
 	}
 
@@ -111,10 +113,9 @@ public class LogicaCalculadora {
 	 * 
 	 * @param numero1
 	 *            Primeiro número responsável pelo cálculo,
-	 * @return A raiz quadrada, utilizando a biblioteca Math.pow sobre o
-	 *         numero1.
+	 * @return O resultado da raiz quadrada, utilizando a biblioteca Math.pow.
 	 */
-	public static Double radiciacao(double numero1) {
+	public Double radiciacao(double numero1) {
 		return Math.sqrt(numero1);
 	}
 
@@ -123,10 +124,9 @@ public class LogicaCalculadora {
 	 * 
 	 * @param numero1
 	 *            Primeiro número responsável pelo cálculo,
-	 * @return O número logarítmico, utilizando a biblioteca Math.log sobre o
-	 *         numero1.
+	 * @return O número logarítmico, utilizando a biblioteca Math.log sobre o numero1.
 	 */
-	public static Double logaritmico(double numero1) {
+	public Double logaritmico(double numero1) {
 		return Math.log(numero1);
 	}
 
@@ -135,10 +135,9 @@ public class LogicaCalculadora {
 	 * 
 	 * @param numero1
 	 *            Primeiro número responsável pelo cálculo,
-	 * @return O número exponencial, utilizando a biblioteca Math.exp sobre o
-	 *         numero1.
+	 * @return O número exponencial, utilizando a biblioteca Math.exp sobre o numero1.
 	 */
-	public static Double exponencial(double numero1) {
+	public Double exponencial(double numero1) {
 		return Math.exp(numero1);
 	}
 

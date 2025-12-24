@@ -1,10 +1,12 @@
-package view;
+package view.telaCalculos;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -17,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controller.LogicaConversor;
+import view.telaPrincipal.TelaPrincipal;
 
 /**
  * Essa classe é responsável pela interface gráfica do conversor de temperatura
@@ -33,12 +36,10 @@ public class Conversor {
 	 * 
 	 * *
 	 * <p>
-	 * Esse método cria a janela principal dessa classe, configura todos os
-	 * componentes e trata os eventos de interação com o usuário.
+	 * Esse método cria a janela principal dessa classe, configura todos os componentes e trata os eventos de interação com o usuário.
 	 * </p>
 	 * 
-	 * As operações nessa classe são delegadas para os métodos que contém as
-	 * lógicas na classe {@link controller.LogicaConversor}.
+	 * As operações nessa classe são delegadas para os métodos que contém as lógicas na classe {@link controller.LogicaConversor}.
 	 */
 
 	public static void conversor() {
@@ -67,13 +68,20 @@ public class Conversor {
 
 		JPanel linha1 = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 10));
 		JLabel rotuloTemperatura = new JLabel("Temperatura:");
-		rotuloTemperatura.setPreferredSize(new Dimension(120, 25));
+		rotuloTemperatura.setPreferredSize(new Dimension(120, 30));
 		JTextField campoTemperatura = new JTextField();
-		campoTemperatura.setPreferredSize(new Dimension(200, 25));
+		campoTemperatura.setPreferredSize(new Dimension(200, 30));
 		campoTemperatura.setToolTipText("Digite a temperatura que você deseja converter!");
 		linha1.add(rotuloTemperatura);
 		linha1.add(campoTemperatura);
 		centro.add(linha1);
+
+		campoTemperatura.addKeyListener(new KeyAdapter() {
+			public void keyReleased(KeyEvent e) {
+				String txt = campoTemperatura.getText().trim().replaceAll("[^0-9]", "");
+				campoTemperatura.setText(txt);
+			}
+		});
 
 		JPanel botoes = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
 		JButton converter = new JButton("Converter");
@@ -91,18 +99,30 @@ public class Conversor {
 					int resultado;
 					String unidade;
 
-					if (op.equals("Celsius para Fahrenheit")) {
-						resultado = LogicaConversor.conversorTempCelsiusEmFahrenheit(valorConvertido);
-						unidade = "Fahrenheit";
+					if (comboConversor.getSelectedIndex() == 0) {
+						JOptionPane.showMessageDialog(frame, "Selecione alguma opção antes de continuar!", "Erro",
+								JOptionPane.ERROR_MESSAGE);
 					} else {
-						resultado = LogicaConversor.conversorTempFahrenheitEmCelsius(valorConvertido);
-						unidade = "Celsius";
+						LogicaConversor lc = new LogicaConversor();
+						if (op.equals("Celsius para Fahrenheit")) {
+							resultado = lc.conversorTempCelsiusEmFahrenheit(valorConvertido);
+							unidade = "Fahrenheit";
+							campoTemperatura.setText("");
+							comboConversor.setSelectedIndex(0);
+						} else {
+							resultado = lc.conversorTempFahrenheitEmCelsius(valorConvertido);
+							unidade = "Celsius";
+							campoTemperatura.setText("");
+							comboConversor.setSelectedIndex(0);
+						}
+
+						JOptionPane.showMessageDialog(null,
+								"<html>O resultado da conversão é <font color='red'>" + resultado + "</font> graus</html> " + unidade + "!",
+								"Resultado", JOptionPane.INFORMATION_MESSAGE);
 					}
-
-					JOptionPane.showMessageDialog(null, "<html>O resultado da conversão é <font color='red'>" + resultado + "</font> graus</html> " + unidade + "!", "Resultado", JOptionPane.INFORMATION_MESSAGE);
-
 				} catch (NumberFormatException ex) {
-					JOptionPane.showMessageDialog(frame, "Entrada inválida! Digite apenas números!", "Erro", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(frame, "Entrada inválida! Digite apenas caracteres numéricos e não deixe o campo vazio!",
+							"Erro", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -110,6 +130,7 @@ public class Conversor {
 		limparCampos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				campoTemperatura.setText("");
+				comboConversor.setSelectedIndex(0);
 			}
 		});
 

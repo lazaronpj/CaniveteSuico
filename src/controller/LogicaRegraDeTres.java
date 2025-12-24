@@ -21,7 +21,7 @@ public class LogicaRegraDeTres {
 	 *            responsével pela terceira grandeza.
 	 * @return O valor do cálculo da regra de três direta.
 	 */
-	public static Double regraDeTresDireta(double a, double b, double c) {
+	public Double regraDeTresDireta(double a, double b, double c) {
 		return (b * c) / a;
 	}
 
@@ -36,7 +36,7 @@ public class LogicaRegraDeTres {
 	 *            responsével pela terceira grandeza.
 	 * @return O valor do cálculo da regra de três inversamente proporcional.
 	 */
-	public static Double regraDeTresInversa(double a, double b, double c) {
+	public Double regraDeTresInversa(double a, double b, double c) {
 		return (a * b) / c;
 	}
 

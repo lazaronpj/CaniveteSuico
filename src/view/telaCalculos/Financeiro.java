@@ -1,4 +1,4 @@
-package view;
+package view.telaCalculos;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controller.LogicaFinanceira;
+import view.telaPrincipal.TelaPrincipal;
 
 /**
  * Essa classe é responsável pela interface gráfica do assistente financeiro
@@ -34,18 +35,16 @@ public class Financeiro {
 	 * 
 	 * *
 	 * <p>
-	 * Esse método cria a janela principal dessa classe, configura todos os
-	 * componentes e trata os eventos de interação com o usuário.
+	 * Esse método cria a janela principal dessa classe, configura todos os componentes e trata os eventos de interação com o usuário.
 	 * </p>
 	 * 
-	 * As operações nessa classe são delegadas para os métodos que contém as
-	 * lógicas na classe {@link controller.LogicaFinanceira}.
+	 * As operações nessa classe são delegadas para os métodos que contém as lógicas na classe {@link controller.LogicaFinanceira}.
 	 */
 
 	public static void financeiro() {
 		JFrame frame = new JFrame("Canivete Suíço - Financeiro");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame.setSize(550, 350);
+		frame.setSize(550, 400);
 		frame.setResizable(false);
 		frame.setLayout(new BorderLayout());
 
@@ -61,8 +60,9 @@ public class Financeiro {
 		pergunta.setAlignmentX(JLabel.LEFT_ALIGNMENT);
 		centro.add(pergunta);
 
-		String[] opFinanceira = {"Selecione uma opção", "Valor Futuro Simples", "Valor Futuro Composto", "Valor Presente Simples", "Valor Presente Composto", "Juros Simples", "Juros Compostos", "Tempo Juros Simples",
-				"Tempo Juros Compostos", "Taxa Juros Simples", "Taxa Juros Compostos"};
+		String[] opFinanceira = {"Selecione uma opção", "Valor Futuro Simples", "Valor Futuro Composto", "Valor Presente Simples",
+				"Valor Presente Composto", "Juros Simples", "Juros Compostos", "Tempo Juros Simples", "Tempo Juros Compostos",
+				"Taxa Juros Simples", "Taxa Juros Compostos"};
 		JComboBox<String> comboFinanceiro = new JComboBox<>(opFinanceira);
 		comboFinanceiro.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
 		centro.add(comboFinanceiro);
@@ -72,36 +72,36 @@ public class Financeiro {
 
 		JPanel linha1 = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 5));
 		JLabel valorPresente = new JLabel("Valor Presente:");
-		valorPresente.setPreferredSize(new Dimension(120, 25));
+		valorPresente.setPreferredSize(new Dimension(120, 30));
 		JTextField vp = new JTextField();
-		vp.setPreferredSize(new Dimension(200, 25));
+		vp.setPreferredSize(new Dimension(200, 30));
 		vp.setToolTipText("Digite o valor atual!");
 		linha1.add(valorPresente);
 		linha1.add(vp);
 
 		JPanel linha2 = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 5));
 		JLabel valorFuturo = new JLabel("Valor Futuro:");
-		valorFuturo.setPreferredSize(new Dimension(120, 25));
+		valorFuturo.setPreferredSize(new Dimension(120, 30));
 		JTextField vf = new JTextField();
-		vf.setPreferredSize(new Dimension(200, 25));
+		vf.setPreferredSize(new Dimension(200, 30));
 		vf.setToolTipText("Digite o valor que você quer simular que você terá no futuro!");
 		linha2.add(valorFuturo);
 		linha2.add(vf);
 
 		JPanel linha3 = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 5));
 		JLabel taxaJuros = new JLabel("Taxa de Juros: ");
-		taxaJuros.setPreferredSize(new Dimension(120, 25));
+		taxaJuros.setPreferredSize(new Dimension(120, 30));
 		JTextField tj = new JTextField();
-		tj.setPreferredSize(new Dimension(200, 25));
+		tj.setPreferredSize(new Dimension(200, 30));
 		tj.setToolTipText("Digite a taxa como número decimal (ex: 0.20) ou porcentagem (ex: 20). Não use % ou valores negativos.");
 		linha3.add(taxaJuros);
 		linha3.add(tj);
 
 		JPanel linha4 = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 5));
 		JLabel tempo = new JLabel("Tempo:");
-		tempo.setPreferredSize(new Dimension(120, 25));
+		tempo.setPreferredSize(new Dimension(120, 30));
 		JTextField tmp = new JTextField();
-		tmp.setPreferredSize(new Dimension(200, 25));
+		tmp.setPreferredSize(new Dimension(200, 30));
 		tmp.setToolTipText("Digite o valor do tempo do investimento!");
 		linha4.add(tempo);
 		linha4.add(tmp);
@@ -209,7 +209,8 @@ public class Financeiro {
 					double valorTp = Double.parseDouble(tp);
 
 					if (valorTxj < 0) {
-						JOptionPane.showMessageDialog(frame, "O sistema não aceita taxa com valores negativos!", "Erro", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog(frame, "O sistema não aceita taxa com valores negativos!", "Erro",
+								JOptionPane.ERROR_MESSAGE);
 						return;
 					}
 
@@ -217,90 +218,130 @@ public class Financeiro {
 						valorTxj /= 100.0;
 					}
 
-					if (op.equals("Valor Futuro Simples")) {
-						double resultado = LogicaFinanceira.valorFuturoSimples(valorVlp, valorTxj, valorTp);
-						String formatado = String.format("%.4f", resultado);
-						JOptionPane.showMessageDialog(frame, "O resultado é: R$ " + formatado, "Resultado", JOptionPane.INFORMATION_MESSAGE);
-						vp.setText("");
-						vf.setText("");
-						tj.setText("");
-						tmp.setText("");
-					} else if (op.equals("Valor Futuro Composto")) {
-						double resultado = LogicaFinanceira.valorFuturoComposto(valorVlp, valorTxj, valorTp);
-						String formatado = String.format("%.4f", resultado);
-						JOptionPane.showMessageDialog(frame, "O resultado é: R$ " + formatado, "Resultado", JOptionPane.INFORMATION_MESSAGE);
-						vp.setText("");
-						vf.setText("");
-						tj.setText("");
-						tmp.setText("");
-					} else if (op.equals("Valor Presente Simples")) {
-						double resultado = LogicaFinanceira.valorPresenteSimples(valorVlf, valorTxj, valorTp);
-						String formatado = String.format("%.4f", resultado);
-						JOptionPane.showMessageDialog(frame, "O resultado é: R$ " + formatado, "Resultado", JOptionPane.INFORMATION_MESSAGE);
-						vp.setText("");
-						vf.setText("");
-						tj.setText("");
-						tmp.setText("");
-					} else if (op.equals("Valor Presente Composto")) {
-						double resultado = LogicaFinanceira.valorPresenteComposto(valorVlf, valorTxj, valorTp);
-						String formatado = String.format("%.4f", resultado);
-						JOptionPane.showMessageDialog(frame, "O resultado é: R$ " + formatado, "Resultado", JOptionPane.INFORMATION_MESSAGE);
-						vp.setText("");
-						vf.setText("");
-						tj.setText("");
-						tmp.setText("");
-					} else if (op.equals("Juros Simples")) {
-						double resultado = LogicaFinanceira.jurosSimples(valorVlp, valorTxj, valorTp);
-						String formatado = String.format("%.4f", resultado);
-						JOptionPane.showMessageDialog(frame, "O resultado é: R$ " + formatado, "Resultado", JOptionPane.INFORMATION_MESSAGE);
-						vp.setText("");
-						vf.setText("");
-						tj.setText("");
-						tmp.setText("");
-					} else if (op.equals("Juros Compostos")) {
-						double resultado = LogicaFinanceira.jurosCompostos(valorVlp, valorTxj, valorTp);
-						String formatado = String.format("%.4f", resultado);
-						JOptionPane.showMessageDialog(frame, "O resultado é: R$ " + formatado, "Resultado", JOptionPane.INFORMATION_MESSAGE);
-						vp.setText("");
-						vf.setText("");
-						tj.setText("");
-						tmp.setText("");
-					} else if (op.equals("Tempo Juros Simples")) {
-						double resultado = LogicaFinanceira.tempoSimples(valorVlp, valorVlf, valorTxj);
-						String formatado = String.format("%.4f", resultado);
-						JOptionPane.showMessageDialog(frame, "O resultado é: " + formatado, "Resultado", JOptionPane.INFORMATION_MESSAGE);
-						vp.setText("");
-						vf.setText("");
-						tj.setText("");
-						tmp.setText("");
-					} else if (op.equals("Tempo Juros Compostos")) {
-						double resultado = LogicaFinanceira.tempoComposto(valorVlp, valorVlf, valorTxj);
-						String formatado = String.format("%.4f", resultado);
-						JOptionPane.showMessageDialog(frame, "O resultado é: " + formatado, "Resultado", JOptionPane.INFORMATION_MESSAGE);
-						vp.setText("");
-						vf.setText("");
-						tj.setText("");
-						tmp.setText("");
-					} else if (op.equals("Taxa Juros Simples")) {
-						double resultado = LogicaFinanceira.taxaSimples(valorVlp, valorVlf, valorTp);
-						String formatado = String.format("%.4f", resultado);
-						JOptionPane.showMessageDialog(frame, "O resultado é: " + formatado, "Resultado", JOptionPane.INFORMATION_MESSAGE);
-						vp.setText("");
-						vf.setText("");
-						tj.setText("");
-						tmp.setText("");
-					} else if (op.equals("Taxa Juros Compostos")) {
-						double resultado = LogicaFinanceira.taxaComposta(valorVlp, valorVlf, valorTp);
-						String formatado = String.format("%.4f", resultado);
-						JOptionPane.showMessageDialog(frame, "O resultado é: " + formatado, "Resultado", JOptionPane.INFORMATION_MESSAGE);
-						vp.setText("");
-						vf.setText("");
-						tj.setText("");
-						tmp.setText("");
+					if (comboFinanceiro.getSelectedIndex() == 0) {
+						JOptionPane.showMessageDialog(frame, "Selecione alguma opção antes de continuar!", "Erro",
+								JOptionPane.ERROR_MESSAGE);
+					} else {
+						LogicaFinanceira lf = new LogicaFinanceira();
+
+						if (op.equals("Valor Futuro Simples")) {
+							double resultado = lf.valorFuturoSimples(valorVlp, valorTxj, valorTp);
+							String formatado = String.format("%.4f", resultado);
+							JOptionPane.showMessageDialog(frame, "O resultado é: R$ " + formatado, "Resultado",
+									JOptionPane.INFORMATION_MESSAGE);
+							vp.setText("");
+							vf.setText("");
+							tj.setText("");
+							tmp.setText("");
+							comboFinanceiro.setSelectedIndex(0);
+						} else if (op.equals("Valor Futuro Composto")) {
+							double resultado = lf.valorFuturoComposto(valorVlp, valorTxj, valorTp);
+							String formatado = String.format("%.4f", resultado);
+							JOptionPane.showMessageDialog(frame, "O resultado é: R$ " + formatado, "Resultado",
+									JOptionPane.INFORMATION_MESSAGE);
+							vp.setText("");
+							vf.setText("");
+							tj.setText("");
+							tmp.setText("");
+							comboFinanceiro.setSelectedIndex(0);
+						} else if (op.equals("Valor Presente Simples")) {
+							double resultado = lf.valorPresenteSimples(valorVlf, valorTxj, valorTp);
+							String formatado = String.format("%.4f", resultado);
+							JOptionPane.showMessageDialog(frame, "O resultado é: R$ " + formatado, "Resultado",
+									JOptionPane.INFORMATION_MESSAGE);
+							vp.setText("");
+							vf.setText("");
+							tj.setText("");
+							tmp.setText("");
+							comboFinanceiro.setSelectedIndex(0);
+						} else if (op.equals("Valor Presente Composto")) {
+							double resultado = lf.valorPresenteComposto(valorVlf, valorTxj, valorTp);
+							String formatado = String.format("%.4f", resultado);
+							JOptionPane.showMessageDialog(frame, "O resultado é: R$ " + formatado, "Resultado",
+									JOptionPane.INFORMATION_MESSAGE);
+							vp.setText("");
+							vf.setText("");
+							tj.setText("");
+							tmp.setText("");
+							comboFinanceiro.setSelectedIndex(0);
+						} else if (op.equals("Juros Simples")) {
+							double resultado = lf.jurosSimples(valorVlp, valorTxj, valorTp);
+							String formatado = String.format("%.4f", resultado);
+							JOptionPane.showMessageDialog(frame, "O resultado é: R$ " + formatado, "Resultado",
+									JOptionPane.INFORMATION_MESSAGE);
+							vp.setText("");
+							vf.setText("");
+							tj.setText("");
+							tmp.setText("");
+							comboFinanceiro.setSelectedIndex(0);
+						} else if (op.equals("Juros Compostos")) {
+							double resultado = lf.jurosCompostos(valorVlp, valorTxj, valorTp);
+							String formatado = String.format("%.4f", resultado);
+							JOptionPane.showMessageDialog(frame, "O resultado é: R$ " + formatado, "Resultado",
+									JOptionPane.INFORMATION_MESSAGE);
+							vp.setText("");
+							vf.setText("");
+							tj.setText("");
+							tmp.setText("");
+							comboFinanceiro.setSelectedIndex(0);
+						} else if (op.equals("Tempo Juros Simples")) {
+							double resultado = lf.tempoSimples(valorVlp, valorVlf, valorTxj);
+							String formatado = String.format("%.4f", resultado);
+							JOptionPane.showMessageDialog(frame, "O resultado é: " + formatado, "Resultado",
+									JOptionPane.INFORMATION_MESSAGE);
+							vp.setText("");
+							vf.setText("");
+							tj.setText("");
+							tmp.setText("");
+							comboFinanceiro.setSelectedIndex(0);
+						} else if (op.equals("Tempo Juros Compostos")) {
+							double resultado = lf.tempoComposto(valorVlp, valorVlf, valorTxj);
+							String formatado = String.format("%.4f", resultado);
+							JOptionPane.showMessageDialog(frame, "O resultado é: " + formatado, "Resultado",
+									JOptionPane.INFORMATION_MESSAGE);
+							vp.setText("");
+							vf.setText("");
+							tj.setText("");
+							tmp.setText("");
+							comboFinanceiro.setSelectedIndex(0);
+						} else if (op.equals("Taxa Juros Simples")) {
+							double resultado = lf.taxaSimples(valorVlp, valorVlf, valorTp);
+							String formatado = String.format("%.4f", resultado);
+							JOptionPane.showMessageDialog(frame, "O resultado é: " + formatado, "Resultado",
+									JOptionPane.INFORMATION_MESSAGE);
+							vp.setText("");
+							vf.setText("");
+							tj.setText("");
+							tmp.setText("");
+							comboFinanceiro.setSelectedIndex(0);
+						} else if (op.equals("Taxa Juros Compostos")) {
+							double resultado = lf.taxaComposta(valorVlp, valorVlf, valorTp);
+							String formatado = String.format("%.4f", resultado);
+							JOptionPane.showMessageDialog(frame, "O resultado é: " + formatado, "Resultado",
+									JOptionPane.INFORMATION_MESSAGE);
+							vp.setText("");
+							vf.setText("");
+							tj.setText("");
+							tmp.setText("");
+							comboFinanceiro.setSelectedIndex(0);
+						}
 					}
 				} catch (NumberFormatException ex) {
-					JOptionPane.showMessageDialog(frame, "Entrada inválida! Digite apenas números!", "Erro", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(frame, "Entrada inválida! Digite apenas números e preencha todos os campos disponíveis!",
+							"Erro", JOptionPane.ERROR_MESSAGE);
 				}
+			}
+		});
+
+		limparCampos.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				vp.setText("");
+				vf.setText("");
+				tj.setText("");
+				tmp.setText("");
+				comboFinanceiro.setSelectedIndex(0);
 			}
 		});
 

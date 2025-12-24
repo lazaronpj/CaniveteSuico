@@ -1,4 +1,4 @@
-package view;
+package view.telaCalculos;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -19,10 +19,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import controller.LogicaEquacaoInequacao;
+import view.telaPrincipal.TelaPrincipal;
 
 /**
- * Essa classe é responsável pela interface gráfica do cálculo de equações e
- * inequações
+ * Essa classe é responsável pela interface gráfica do cálculo de equações e inequações
  * 
  * @author Lazaro Nogueira
  * @version 1.1
@@ -32,17 +32,14 @@ import controller.LogicaEquacaoInequacao;
 public class EquacaoInequacao {
 
 	/**
-	 * Exibe a interface gráfica da calculadora de equações e inequações do
-	 * primeiro e do segundo grau.
+	 * Exibe a interface gráfica da calculadora de equações e inequações do primeiro e do segundo grau.
 	 * 
 	 * *
 	 * <p>
-	 * Esse método cria a janela principal dessa classe, configura todos os
-	 * componentes e trata os eventos de interação com o usuário.
+	 * Esse método cria a janela principal dessa classe, configura todos os componentes e trata os eventos de interação com o usuário.
 	 * </p>
 	 * 
-	 * As operações nessa classe são delegadas para os métodos que contém as
-	 * lógicas na classe {@link controller.LogicaEquacaoInequacao}.
+	 * As operações nessa classe são delegadas para os métodos que contém as lógicas na classe {@link controller.LogicaEquacaoInequacao}.
 	 */
 
 	public static void equacaoInequacao() {
@@ -64,16 +61,17 @@ public class EquacaoInequacao {
 		pergunta.setAlignmentX(JLabel.LEFT_ALIGNMENT);
 		centro.add(pergunta);
 
-		String[] opcoesEqIn = {"Selecione uma opção", "Equação do primeiro grau", "Equação do segundo grau X1", "Equação do segundo grau X2", "Inequação do primeiro grau", "Inequação do segundo grau"};
+		String[] opcoesEqIn = {"Selecione uma opção", "Equação do primeiro grau", "Equação do segundo grau X1",
+				"Equação do segundo grau X2", "Inequação do primeiro grau", "Inequação do segundo grau"};
 		JComboBox<String> comboOp = new JComboBox<>(opcoesEqIn);
 		comboOp.setMaximumSize(new Dimension(Integer.MAX_VALUE, 30));
 		centro.add(comboOp);
 
 		JPanel linha1 = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 10));
 		JLabel rotuloA = new JLabel("Valor A:");
-		rotuloA.setPreferredSize(new Dimension(120, 25));
+		rotuloA.setPreferredSize(new Dimension(120, 30));
 		JTextField campoA = new JTextField();
-		campoA.setPreferredSize(new Dimension(200, 25));
+		campoA.setPreferredSize(new Dimension(200, 30));
 		campoA.setToolTipText("Digite o valor correspondente a 'A'! ");
 		linha1.add(rotuloA);
 		linha1.add(campoA);
@@ -81,9 +79,9 @@ public class EquacaoInequacao {
 
 		JPanel linha2 = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 10));
 		JLabel rotuloB = new JLabel("Valor B:");
-		rotuloB.setPreferredSize(new Dimension(120, 25));
+		rotuloB.setPreferredSize(new Dimension(120, 30));
 		JTextField campoB = new JTextField();
-		campoB.setPreferredSize(new Dimension(200, 25));
+		campoB.setPreferredSize(new Dimension(200, 30));
 		campoB.setToolTipText("Digite o valor correspondente a 'B'! ");
 		linha2.add(rotuloB);
 		linha2.add(campoB);
@@ -91,9 +89,9 @@ public class EquacaoInequacao {
 
 		JPanel linha3 = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 10));
 		JLabel rotuloC = new JLabel("Valor C:");
-		rotuloC.setPreferredSize(new Dimension(120, 25));
+		rotuloC.setPreferredSize(new Dimension(120, 30));
 		JTextField campoC = new JTextField();
-		campoC.setPreferredSize(new Dimension(200, 25));
+		campoC.setPreferredSize(new Dimension(200, 30));
 		campoC.setToolTipText("Digite o valor correspondente a 'C'! ");
 		linha3.add(rotuloC);
 		linha3.add(campoC);
@@ -101,10 +99,10 @@ public class EquacaoInequacao {
 
 		JPanel linha4 = new JPanel(new FlowLayout(FlowLayout.LEFT, 20, 10));
 		JLabel rotuloSinal = new JLabel("Valor desigualdade:");
-		rotuloSinal.setPreferredSize(new Dimension(120, 25));
+		rotuloSinal.setPreferredSize(new Dimension(120, 30));
 		String[] opcoesDesigualdade = {"Selecione uma opção", "> 'Maior'", "< 'Menor'", "≥ 'Maior ou igual'", "≤ 'Menor ou igual'"};
 		JComboBox<String> comboDesigualdade = new JComboBox<>(opcoesDesigualdade);
-		comboDesigualdade.setPreferredSize(new Dimension(200, 25));
+		comboDesigualdade.setPreferredSize(new Dimension(200, 30));
 		comboDesigualdade.setToolTipText("Selecione o sinal correspondente a desigualdade! ");
 		linha4.add(rotuloSinal);
 		linha4.add(comboDesigualdade);
@@ -137,7 +135,8 @@ public class EquacaoInequacao {
 			public void actionPerformed(ActionEvent e) {
 				String opSelecionada = (String) comboOp.getSelectedItem();
 
-				if (("Equação do primeiro grau".equals(opSelecionada)) || ("Equação do segundo grau X1".equals(opSelecionada)) || ("Equação do segundo grau X2".equals(opSelecionada))) {
+				if (("Equação do primeiro grau".equals(opSelecionada)) || ("Equação do segundo grau X1".equals(opSelecionada))
+						|| ("Equação do segundo grau X2".equals(opSelecionada))) {
 					comboDesigualdade.setEnabled(false);
 
 				} else {
@@ -153,6 +152,7 @@ public class EquacaoInequacao {
 
 			}
 		});
+		// se o campo c for liberado ele nao deve conter o numero 0
 
 		JPanel botoes = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
 		JButton calcular = new JButton("Calcular");
@@ -173,43 +173,69 @@ public class EquacaoInequacao {
 
 					String opSelecionada = (String) comboOp.getSelectedItem();
 
-					if ("Equação do primeiro grau".equals(opSelecionada)) {
+					if (comboOp.getSelectedIndex() == 0) {
+						JOptionPane.showMessageDialog(frame, "Selecione alguma opção antes de continuar!", "Erro",
+								JOptionPane.ERROR_MESSAGE);
+					} else {
+						LogicaEquacaoInequacao le = new LogicaEquacaoInequacao();
 
-						Double resultado = LogicaEquacaoInequacao.equacaoPrimeiroGrau(valorA, valorB);
-						if (resultado != null) {
-							String formatado = String.format("%.4f", resultado);
-							JOptionPane.showMessageDialog(frame, "O resultado é: X = " + formatado, "Resultado", JOptionPane.INFORMATION_MESSAGE);
+						if ("Equação do primeiro grau".equals(opSelecionada)) {
+							Double resultado = le.equacaoPrimeiroGrau(valorA, valorB);
+							if (resultado != null) {
+								String formatado = String.format("%.4f", resultado);
+								JOptionPane.showMessageDialog(frame, "O resultado é: X = " + formatado, "Resultado",
+										JOptionPane.INFORMATION_MESSAGE);
+								comboOp.setSelectedIndex(0);
+								campoA.setText("");
+								campoB.setText("");
+								comboDesigualdade.setSelectedIndex(0);
+							}
+						} else if ("Equação do segundo grau X1".equals(opSelecionada)) {
+							Double resultado = le.equacaoSegundoGrauX1(valorA, valorB, valorC);
+							if (resultado != null) {
+								String formatado = String.format("%.4f", resultado);
+								JOptionPane.showMessageDialog(frame, "O resultado é: X1 = " + formatado, "Resultado",
+										JOptionPane.INFORMATION_MESSAGE);
+								comboOp.setSelectedIndex(0);
+								campoA.setText("");
+								campoB.setText("");
+								campoC.setText("");
+								comboDesigualdade.setSelectedIndex(0);
+							}
+						} else if ("Equação do segundo grau X2".equals(opSelecionada)) {
+							Double resultado = le.equacaoSegundoGrauX2(valorA, valorB, valorC);
+							if (resultado != null) {
+								String formatado = String.format("%.4f", resultado);
+								JOptionPane.showMessageDialog(frame, "O resultado é: X2 = " + formatado, "Resultado",
+										JOptionPane.INFORMATION_MESSAGE);
+								comboOp.setSelectedIndex(0);
+								campoA.setText("");
+								campoB.setText("");
+								campoC.setText("");
+								comboDesigualdade.setSelectedIndex(0);
+							}
+						} else if ("Inequação do primeiro grau".equals(opSelecionada)) {
+
+							// "> 'Maior'", "< 'Menor'", "≥ 'Maior ou igual'", "≤ 'Menor ou igual'"
 							comboOp.setSelectedIndex(0);
 							campoA.setText("");
 							campoB.setText("");
+							campoC.setText("");
 							comboDesigualdade.setSelectedIndex(0);
-						}
-					} else if ("Equação do segundo grau X1".equals(opSelecionada)) {
-						Double resultado = LogicaEquacaoInequacao.equacaoSegundoGrauX1(valorA, valorB, valorC);
-						if (resultado != null) {
-							String formatado = String.format("%.4f", resultado);
-							JOptionPane.showMessageDialog(frame, "O resultado é: X1 = " + formatado, "Resultado", JOptionPane.INFORMATION_MESSAGE);
+						} else if ("Inequação do segundo grau".equals(opSelecionada)) {
+
 							comboOp.setSelectedIndex(0);
 							campoA.setText("");
 							campoB.setText("");
 							campoC.setText("");
 							comboDesigualdade.setSelectedIndex(0);
 						}
-					} else if ("Equação do segundo grau X2".equals(opSelecionada)) {
-						Double resultado = LogicaEquacaoInequacao.equacaoSegundoGrauX2(valorA, valorB, valorC);
-						if (resultado != null) {
-							String formatado = String.format("%.4f", resultado);
-							JOptionPane.showMessageDialog(frame, "O resultado é: X2 = " + formatado, "Resultado", JOptionPane.INFORMATION_MESSAGE);
-							comboOp.setSelectedIndex(0);
-							campoA.setText("");
-							campoB.setText("");
-							campoC.setText("");
-							comboDesigualdade.setSelectedIndex(0);
-						}
+
+						// Falta completar a implementação dos cálculos das inequações.
 					}
-
 				} catch (NumberFormatException ex) {
-					JOptionPane.showMessageDialog(frame, "Entrada inválida! Digite apenas números!", "Erro", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(frame, "Entrada inválida! Digite apenas números e preencha todos os campos!", "Erro",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
